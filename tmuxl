@@ -1,0 +1,15 @@
+#!/bin/bash
+if tmux list-clients 2>/dev/null 1> /dev/null
+then
+        if pgrep alacritty 1>/dev/null
+        then
+                xdotool windowactivate $( xdotool search --class alacritty )
+                tmux new-window
+        else
+                alacritty -e tmux attach
+        fi
+#       tmux attach #echo 1
+else
+        alacritty -e tmux new-session -s Arch
+        echo 2
+fi
